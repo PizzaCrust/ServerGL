@@ -37,4 +37,10 @@ public interface GLClient
      */
     void drawString(GLCoordinates coordinates);
 
+    /**
+     * Retrieve the client resolution to make some objects use client resizing.
+     * @return the resolution
+     */
+    Resolution getClientResolution();
+
 }
