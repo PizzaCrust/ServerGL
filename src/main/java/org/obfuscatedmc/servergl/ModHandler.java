@@ -20,7 +20,9 @@ public class ModHandler
                     if (PluginCore.CACHED_LOADED_MOD_PLAYERS.contains(e.getPlayer())) {
                         e.getPlayer().sendMessage(ChatColor.GREEN + "Verified!");
                     } else {
-                        e.getPlayer().kickPlayer(ChatColor.RED + "Failed to verify client.");
+                        e.getPlayer().kickPlayer(ChatColor.GOLD + "Please install " +
+                                "ServerGL-Client mod.\n" + ChatColor.RED + "Failed to verify" +
+                                "client.");
                     }
                 }
             }, 40L);
