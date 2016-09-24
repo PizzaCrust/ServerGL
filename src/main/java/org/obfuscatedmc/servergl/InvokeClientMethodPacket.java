@@ -36,6 +36,7 @@ public class InvokeClientMethodPacket
         DataOutputStream dataOutputStream = new DataOutputStream(byteArrayOutputStream);
         byte[] theBytes = new byte[0];
         try {
+            dataOutputStream.writeByte(2);
             dataOutputStream.writeUTF(this.name);
             for (String string : strings) {
                 dataOutputStream.writeUTF(string);
