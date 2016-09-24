@@ -1,5 +1,7 @@
 package org.obfuscatedmc.servergl.api;
 
+import java.io.Serializable;
+
 /**
  * Represents the resolution.
  *
@@ -7,6 +9,7 @@ package org.obfuscatedmc.servergl.api;
  * @author PizzaCrust
  */
 public class Resolution
+    implements Serializable
 {
 
     public final int width;

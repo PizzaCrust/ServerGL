@@ -1,5 +1,7 @@
 package org.obfuscatedmc.servergl;
 
+import com.google.common.base.Optional;
+
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -8,13 +10,15 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.obfuscatedmc.servergl.api.OpenGL;
+import org.obfuscatedmc.servergl.api.Resolution;
+import org.obfuscatedmc.servergl.data.BinarySave;
 import org.obfuscatedmc.servergl.data.DataManager;
-import org.obfuscatedmc.servergl.event.ClientInfoPacketReceiveEvent;
 import org.obfuscatedmc.servergl.impl.GL11Provider;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -42,9 +46,9 @@ public class PluginCore
     public static boolean MOD_REQ = false;
 
     public static Listener[] LISTENERS = new Listener[] {
-            new ResolutionHandler(),
+            //new ResolutionHandler(),
             new ModHandler(),
-            new JoinModRegistar(),
+            //new JoinModRegistar(),
     };
 
     @Override
@@ -62,7 +66,7 @@ public class PluginCore
             this.createConfig();
         }
         Bukkit.getMessenger().registerIncomingPluginChannel(this, "ClientInfo", new
-                ClientInfoPacketReceiveEvent.Listener());
+                 ClientInfoHandler());
         Bukkit.getMessenger().registerOutgoingPluginChannel(this, "OrderChannel");
         for (Listener listener : LISTENERS) {
             Bukkit.getPluginManager().registerEvents(listener, this);
@@ -84,7 +88,22 @@ public class PluginCore
     }
 
     public static boolean isCapableOfCustomRendering(Player player) {
-        return ResolutionHandler.getResolution(player).isPresent();
+        return getResolution(player).isPresent();
+    }
+
+    public static Optional<Resolution> getResolution(Player player) {
+        BinarySave binarySave = PluginCore.DATA.of(player);
+        Optional<HashMap<String, Object>> optional = binarySave.get();
+        if (optional.isPresent()) {
+            HashMap<String, Object> objectHashMap = optional.get();
+            if (objectHashMap.containsKey("resolution")) {
+                return Optional.of((Resolution) objectHashMap.get("resolution"));
+            } else {
+                return Optional.absent();
+            }
+        } else {
+            return Optional.absent();
+        }
     }
 
     private void createConfig() {

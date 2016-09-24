@@ -3,7 +3,6 @@ package org.obfuscatedmc.servergl.impl;
 import org.bukkit.entity.Player;
 import org.obfuscatedmc.servergl.InvokeClientMethodPacket;
 import org.obfuscatedmc.servergl.PluginCore;
-import org.obfuscatedmc.servergl.ResolutionHandler;
 import org.obfuscatedmc.servergl.api.GLClient;
 import org.obfuscatedmc.servergl.api.GLCoordinates;
 import org.obfuscatedmc.servergl.api.QuadCoordinates;
@@ -50,7 +49,7 @@ public class GL11Client implements GLClient {
 
     public Resolution getClientResolution() {
         if (PluginCore.isCapableOfCustomRendering(this.player))
-            return ResolutionHandler.getResolution(this.player).get();
+            return PluginCore.getResolution(this.player).get();
         throw new RuntimeException("Not capable of custom rendering!");
     }
 
