@@ -41,6 +41,7 @@ public class PluginCore
         }
         Bukkit.getMessenger().registerIncomingPluginChannel(this, "ClientInfo", new
                 ClientInfoPacketReceiveEvent.Listener());
+        Bukkit.getMessenger().registerOutgoingPluginChannel(this, "OrderChannel");
         for (Listener listener : LISTENERS) {
             Bukkit.getPluginManager().registerEvents(listener, this);
         }
