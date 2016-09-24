@@ -1,0 +1,5 @@
+name: ServerGL
+version: 1.0-SNAPSHOT
+description: Experimental OpenGL/LWJGL 1.1
+author: PizzaCrust
+main: org.obfuscatedmc.servergl.PluginCore
