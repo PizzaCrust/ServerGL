@@ -33,9 +33,10 @@ public interface GLClient
 
     /**
      * Uses native methods to draw a string with Minecraft's default FontRenderer.
+     * @param string the message
      * @param coordinates the coordinates
      */
-    void drawString(GLCoordinates coordinates);
+    void drawString(String string, GLCoordinates coordinates);
 
     /**
      * Retrieve the client resolution to make some objects use client resizing.

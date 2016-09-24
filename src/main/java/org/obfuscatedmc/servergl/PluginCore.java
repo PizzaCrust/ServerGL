@@ -3,6 +3,7 @@ package org.obfuscatedmc.servergl;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.obfuscatedmc.servergl.data.DataManager;
 import org.obfuscatedmc.servergl.event.ClientInfoPacketReceiveEvent;
@@ -26,6 +27,7 @@ public class PluginCore
     public static File DIRECTORY;
 
     public static DataManager DATA;
+    public static Plugin INSTANCE;
 
     public static Listener[] LISTENERS = new Listener[] {
             new ResolutionHandler()
@@ -33,6 +35,7 @@ public class PluginCore
 
     @Override
     public void onEnable() {
+        INSTANCE = this;
         DATA = new DataManager();
         PARENT_DIRECTORY = this.getDataFolder().getParentFile();
         DIRECTORY = new File(PARENT_DIRECTORY, "ServerGL-Data");

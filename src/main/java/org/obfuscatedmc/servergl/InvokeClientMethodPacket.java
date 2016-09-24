@@ -14,17 +14,21 @@ public class InvokeClientMethodPacket
 {
 
     private final String name;
+    private final String[] strings;
     private final int[] ints;
 
     private InvokeClientMethodPacket(String name,
+                                     String[] strings,
                                      int[] ints) {
         this.name = name;
+        this.strings = strings;
         this.ints = ints;
     }
 
     public static InvokeClientMethodPacket create(String name,
+                                                  String[] strings,
                                                   int[] ints) {
-        return new InvokeClientMethodPacket(name, ints);
+        return new InvokeClientMethodPacket(name, strings, ints);
     }
 
     public byte[] asBytes() {
@@ -33,6 +37,9 @@ public class InvokeClientMethodPacket
         byte[] theBytes = new byte[0];
         try {
             dataOutputStream.writeUTF(this.name);
+            for (String string : strings) {
+                dataOutputStream.writeUTF(string);
+            }
             for (int integer : ints) {
                 dataOutputStream.writeInt(integer);
             }
