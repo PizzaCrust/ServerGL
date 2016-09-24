@@ -13,7 +13,7 @@ import org.obfuscatedmc.servergl.api.Resolution;
 public class GL11Client implements GLClient {
     private final Player player;
 
-    public GL11Client(Player player) {
+    protected GL11Client(Player player) {
         this.player = player;
     }
 

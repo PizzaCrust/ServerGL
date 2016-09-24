@@ -9,6 +9,8 @@ package org.obfuscatedmc.servergl.api;
 public class OrderedUtilities
 {
 
+    private OrderedUtilities() {}
+
     /**
      * Draws a rectangle with a texture.
      * @param glClient the gl client
