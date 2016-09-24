@@ -99,9 +99,13 @@ public class PluginCore
             if (objectHashMap.containsKey("resolution")) {
                 return Optional.of((Resolution) objectHashMap.get("resolution"));
             } else {
+                PluginCore.INSTANCE.getLogger().info("Player " + player.getName() + " does not " +
+                        "have a resolution entry.");
                 return Optional.absent();
             }
         } else {
+            PluginCore.INSTANCE.getLogger().info("Player " + player.getName() + " does not have a" +
+                    " save document and cannot access #getResolution!");
             return Optional.absent();
         }
     }

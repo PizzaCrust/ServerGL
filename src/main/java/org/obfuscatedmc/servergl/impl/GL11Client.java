@@ -25,10 +25,12 @@ public class GL11Client implements GLClient {
     }
 
     private void invoke(String method, String[] strings, int[] array) {
-        if (PluginCore.isCapableOfCustomRendering(player))
+        if (PluginCore.isCapableOfCustomRendering(player)) {
             player.sendPluginMessage(PluginCore.INSTANCE, "OrderChannel", InvokeClientMethodPacket
                     .create(method, strings, array).asBytes());
-        throw new RuntimeException("Not capable of custom rendering.");
+        } else {
+            throw new RuntimeException("Not capable of custom rendering.");
+        }
     }
 
     public void bindTexture(String resourceLocation) {

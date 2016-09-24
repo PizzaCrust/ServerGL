@@ -5,6 +5,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.obfuscatedmc.servergl.api.GLCoordinates;
+import org.obfuscatedmc.servergl.api.OpenGL;
 
 public class ModHandler
         implements Listener
@@ -19,9 +21,10 @@ public class ModHandler
                 public void run() {
                     if (PluginCore.CACHED_LOADED_MOD_PLAYERS.contains(e.getPlayer())) {
                         e.getPlayer().sendMessage(ChatColor.GREEN + "Verified!");
+                        OpenGL.getProvider().retrieveClient(e.getPlayer()).get().drawString
+                                ("ServerGL", GLCoordinates.of(0, 0));
                     } else {
-                        e.getPlayer().kickPlayer(ChatColor.GOLD + "Please install " +
-                                "ServerGL-Client mod.\n" + ChatColor.RED + "Failed to verify" +
+                        e.getPlayer().kickPlayer(ChatColor.RED + "Failed to verify" +
                                 "client.");
                     }
                 }
